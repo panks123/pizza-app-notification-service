@@ -15,6 +15,7 @@ export class MailTransport implements NotificationTransport {
         user: config.get("mail.auth.user"),
         pass: config.get("mail.auth.pass"),
       },
+      debug: true, // include SMTP traffic in the console
     });
     logger.info("Mail transport created" );
   }
