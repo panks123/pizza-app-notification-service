@@ -6,6 +6,7 @@ import logger from "./config/logger";
 export class MailTransport implements NotificationTransport {
     private transporter: Transporter
   constructor() {
+    console.log("MailTransoport creds: ", {host: config.get("mail.host"), port: config.get("mail.port"), user: config.get("mail.auth.user"), pas: config.get("mail.auth.pass")});
     this.transporter = nodemailer.createTransport({
       host: config.get("mail.host"),
       port: config.get("mail.port"),
@@ -15,6 +16,7 @@ export class MailTransport implements NotificationTransport {
         pass: config.get("mail.auth.pass"),
       },
     });
+    logger.info("Mail transport created" );
   }
   async send(message: Message) {
     const info = await this.transporter.sendMail({
