@@ -21,10 +21,11 @@ export class MailTransport implements NotificationTransport {
     logger.info("Mail transport created" );
   }
   async send(message: Message) {
+    console.log("Sending mail: ", {message, from: config.get("mail.from")});
     const info = await this.transporter.sendMail({
         from: config.get("mail.from"),
         to: message.to,
-        subject: message.subject,
+        subject: message.subject || "_",
         text: message.text,
         html: message.html,  
     });
